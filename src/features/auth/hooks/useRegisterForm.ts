@@ -25,9 +25,9 @@ export default function useRegisterForm() {
   function onSubmit(values: RegisterFormSchema) {
     mutate(values, {
       onSuccess: () => {
-        navigate(ROUTES.LOGIN);
         form.reset();
         setIsShow(true);
+        navigate(ROUTES.LOGIN);
       },
       onError: () => {
         setIsShow(true);
