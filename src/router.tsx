@@ -3,17 +3,17 @@ import RegisterPage from "./features/auth/pages/RegisterPage"
 import LoginPage from "./features/auth/pages/LoginPage"
 import { ROUTES } from "./utils/constants"
 import HomePage from "./features/home/pages/HomePage"
-import { Navbar } from "./components/shared/Navbar"
 import TopUpPage from "./features/top-up/pages/TopUpPage"
 import ElectricityPaymentsPage from "./features/electricity-payments/pages/ElectricityPaymentsPage"
 import TransactionPage from "./features/transaction/pages/TransactionPage"
+import Header from "./components/Layout/Header"
 
 const router = createBrowserRouter(
   [{
     path: ROUTES.HOME,
     element:
       <>
-        <Navbar />
+        <Header />
         <HomePage />
       </>
   },
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
     path: ROUTES.TOP_UP,
     element:
       <>
-        <Navbar />
+        <Header />
         <TopUpPage />
       </>
   },
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
     path: ROUTES.ELECTRICITY_PAYMENTS,
     element:
       <>
-        <Navbar />
+        <Header />
         <ElectricityPaymentsPage />
       </>
   },
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
     path: ROUTES.TRANSACTIONS,
     element:
       <>
-        <Navbar />
+        <Header />
         <TransactionPage />
       </>
   },

@@ -20,7 +20,7 @@ const TransactionList = () => {
         ))
         }
       </ul>
-      <p className="text-primary font-semibold text-center">Show more</p>
+      <p className="text-primary font-semibold text-center mb-20">Show more</p>
     </>
   )
 }
