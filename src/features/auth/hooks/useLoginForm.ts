@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { loginFormSchema, type LoginFormSchema } from "../forms/login";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLoginMutation } from "@/services/auth/mutatuions/useLoginMutation";
-import { LS_TOKEN, ROUTES } from "@/utils/constants";
-import { useNavigate } from "react-router";
-import type { Response } from "@/services/auth/types";
+import { ROUTES } from "@/utils/constants";
+import { useLocation, useNavigate } from "react-router";
+import { setCredentials } from "../authSlice";
+import { useDispatch } from "react-redux";
+import { useLoginMutation, type Response } from "@/services/auth";
 
 export default function useLoginForm() {
   const form = useForm<LoginFormSchema>({
@@ -17,14 +18,20 @@ export default function useLoginForm() {
 
   const [login, { isLoading, data, isError, error, isSuccess }] =
     useLoginMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || ROUTES.HOME;
 
   function onSubmit(values: LoginFormSchema) {
     login(values)
       .unwrap()
       .then((response) => {
-        localStorage.setItem(LS_TOKEN, response.data?.token!);
-        navigate(ROUTES.HOME);
+        const token = response.data?.token;
+        if (token) {
+          dispatch(setCredentials(token));
+          navigate(from, { replace: true });
+        }
       });
   }
 

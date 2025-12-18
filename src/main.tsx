@@ -3,13 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from "react-router"
 import router from './router'
-import { ApiProvider } from '@reduxjs/toolkit/query/react'
-import { baseApi } from './services/api'
+import { Provider } from 'react-redux'
+import { store } from './stores'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ApiProvider api={baseApi}>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </ApiProvider>
+    </Provider>
   </StrictMode>,
 )

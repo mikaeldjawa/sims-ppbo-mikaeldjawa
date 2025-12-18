@@ -7,47 +7,43 @@ import TopUpPage from "./features/top-up/pages/TopUpPage"
 import ElectricityPaymentsPage from "./features/electricity-payments/pages/ElectricityPaymentsPage"
 import TransactionPage from "./features/transaction/pages/TransactionPage"
 import Header from "./components/Layout/Header"
+import { Navbar } from "./components/shared/Navbar"
+import ProtectRoute from "./components/shared/ProtectRoute"
+import PublicRoute from "./components/shared/PublicRoute"
 
 const router = createBrowserRouter(
   [{
-    path: ROUTES.HOME,
-    element:
-      <>
-        <Header />
-        <HomePage />
-      </>
-  },
-  {
-    path: ROUTES.TOP_UP,
-    element:
-      <>
-        <Header />
-        <TopUpPage />
-      </>
-  },
-  {
-    path: ROUTES.ELECTRICITY_PAYMENTS,
-    element:
-      <>
-        <Header />
-        <ElectricityPaymentsPage />
-      </>
-  },
-  {
-    path: ROUTES.TRANSACTIONS,
-    element:
-      <>
-        <Header />
-        <TransactionPage />
-      </>
-  },
-  {
-    path: ROUTES.REGISTER,
-    element: <RegisterPage />
+    element: <ProtectRoute />,
+    children: [{
+      element: <Navbar />,
+      children: [
+        {
+          element: <Header />,
+          children: [{
+            path: ROUTES.HOME,
+            element: <HomePage />
+          }, {
+            path: ROUTES.TOP_UP,
+            element: <TopUpPage />
+          }, {
+            path: ROUTES.ELECTRICITY_PAYMENTS,
+            element: <ElectricityPaymentsPage />
+          }, {
+            path: ROUTES.TRANSACTIONS,
+            element: <TransactionPage />
+          }]
+        }]
+    }]
   }, {
-    path: ROUTES.LOGIN,
-    element: <LoginPage />
-  },
+    element: <PublicRoute />,
+    children: [{
+      path: ROUTES.LOGIN,
+      element: <LoginPage />
+    }, {
+      path: ROUTES.REGISTER,
+      element: <RegisterPage />
+    }]
+  }
   ]
 )
 

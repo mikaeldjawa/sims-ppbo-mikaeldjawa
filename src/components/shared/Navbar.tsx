@@ -1,6 +1,6 @@
 import Logo from "@/assets/Logo.png"
 import { Separator } from "../ui/separator"
-import { Link } from "react-router"
+import { Link, Outlet } from "react-router"
 import { ROUTES } from "@/utils/constants"
 
 export const Navbar = () => {
@@ -30,6 +30,7 @@ export const Navbar = () => {
         </ul>
       </nav>
       <Separator />
+      <Outlet />
     </>
   )
 }

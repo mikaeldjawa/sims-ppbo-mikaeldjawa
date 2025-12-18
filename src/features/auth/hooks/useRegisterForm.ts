@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegisterMutation } from "@/services/auth/mutatuions/useRegisterMutation";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/utils/constants";
-import type { Response } from "@/services/auth/types";
+import { useRegisterMutation, type Response } from "@/services/auth";
 
 export default function useRegisterForm() {
   const form = useForm<RegisterFormSchema>({
