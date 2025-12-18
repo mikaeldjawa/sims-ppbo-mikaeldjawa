@@ -6,6 +6,7 @@ import HomePage from "./features/home/pages/HomePage"
 import { Navbar } from "./components/shared/Navbar"
 import TopUpPage from "./features/top-up/pages/TopUpPage"
 import ElectricityPaymentsPage from "./features/electricity-payments/pages/ElectricityPaymentsPage"
+import TransactionPage from "./features/transaction/pages/TransactionPage"
 
 const router = createBrowserRouter(
   [{
@@ -30,6 +31,14 @@ const router = createBrowserRouter(
       <>
         <Navbar />
         <ElectricityPaymentsPage />
+      </>
+  },
+  {
+    path: ROUTES.TRANSACTIONS,
+    element:
+      <>
+        <Navbar />
+        <TransactionPage />
       </>
   },
   {

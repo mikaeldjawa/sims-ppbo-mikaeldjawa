@@ -15,7 +15,7 @@ export const ROUTES = {
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
   TOP_UP: "/top-up",
-  TRANSACTIONS: "/transactions",
+  TRANSACTIONS: "/transaction",
   ELECTRICITY_PAYMENTS: "/electricity-payments",
   ACCOUNT: "/account",
 };
