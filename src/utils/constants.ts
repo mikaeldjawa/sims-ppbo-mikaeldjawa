@@ -14,5 +14,8 @@ export const ROUTES = {
   HOME: "/",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
+  TOP_UP: "/top-up",
+  TRANSACTIONS: "/transactions",
+  ACCOUNT: "/account",
 };
 // ====================================================================================================================
