@@ -6,11 +6,11 @@ import AuthLayout from "../components/AuthLayout"
 import LoginForm from "../components/LoginForm"
 
 const LoginPage = () => {
-  const { form, onSubmit, isPending, error, data, isShow, setIsShow } = useLoginForm()
+  const { form, onSubmit, isLoading, isError, data, isSuccess, error } = useLoginForm()
 
   return (
     <AuthLayout subtitle="Masuk atau buat akun untuk memulai">
-      <LoginForm form={form} onSubmit={onSubmit} isPending={isPending} />
+      <LoginForm form={form} onSubmit={onSubmit} isPending={isLoading} />
 
       <div className="flex gap-1">
         <p className="text-center">belum punya akun? registrasi</p>
@@ -18,10 +18,9 @@ const LoginPage = () => {
       </div>
 
       <AuthInfo
-        isShow={isShow}
-        isError={!!error}
-        message={error ? error.message : data?.message}
-        setShowError={setIsShow} />
+        isShow={isSuccess || isError}
+        isError={isError}
+        message={error ? error?.data?.message : data?.message} />
     </AuthLayout>
   )
 }

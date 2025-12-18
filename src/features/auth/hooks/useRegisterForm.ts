@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useRegister from "@/services/auth/mutatuions/useRegister";
-import useShow from "@/hooks/useShow";
+import { useRegisterMutation } from "@/services/auth/mutatuions/useRegisterMutation";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/utils/constants";
+import type { Response } from "@/services/auth/types";
 
 export default function useRegisterForm() {
   const form = useForm<RegisterFormSchema>({
@@ -18,30 +18,26 @@ export default function useRegisterForm() {
     },
   });
 
-  const { mutate, error, data, isPending } = useRegister();
-  const { isShow, setIsShow } = useShow();
+  const [register, { isLoading, error, data, isError, isSuccess }] =
+    useRegisterMutation();
   const navigate = useNavigate();
 
   function onSubmit(values: RegisterFormSchema) {
-    mutate(values, {
-      onSuccess: () => {
+    register(values)
+      .unwrap()
+      .then(() => {
         form.reset();
-        setIsShow(true);
         navigate(ROUTES.LOGIN);
-      },
-      onError: () => {
-        setIsShow(true);
-      },
-    });
+      });
   }
 
   return {
     form,
     onSubmit,
-    error,
+    isLoading,
+    isError,
+    isSuccess,
+    error: error as { data?: Response },
     data,
-    isPending,
-    isShow,
-    setIsShow,
   };
 }

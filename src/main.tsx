@@ -3,14 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from "react-router"
 import router from './router'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
+import { ApiProvider } from '@reduxjs/toolkit/query/react'
+import { baseApi } from './services/api'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
+    <ApiProvider api={baseApi}>
       <RouterProvider router={router} />
-    </QueryClientProvider>
+    </ApiProvider>
   </StrictMode>,
 )

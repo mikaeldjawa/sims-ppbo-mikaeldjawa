@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { loginFormSchema, type LoginFormSchema } from "../forms/login";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useLogin from "@/services/auth/mutatuions/useLogin";
-import useShow from "@/hooks/useShow";
+import { useLoginMutation } from "@/services/auth/mutatuions/useLoginMutation";
 import { LS_TOKEN, ROUTES } from "@/utils/constants";
 import { useNavigate } from "react-router";
+import type { Response } from "@/services/auth/types";
 
 export default function useLoginForm() {
   const form = useForm<LoginFormSchema>({
@@ -15,30 +15,26 @@ export default function useLoginForm() {
     },
   });
 
-  const { mutate, isPending, error, data } = useLogin();
-  const { isShow, setIsShow } = useShow();
+  const [login, { isLoading, data, isError, error, isSuccess }] =
+    useLoginMutation();
   const navigate = useNavigate();
 
   function onSubmit(values: LoginFormSchema) {
-    mutate(values, {
-      onSuccess: (response) => {
-        setIsShow(true);
+    login(values)
+      .unwrap()
+      .then((response) => {
         localStorage.setItem(LS_TOKEN, response.data?.token!);
         navigate(ROUTES.HOME);
-      },
-      onError: () => {
-        setIsShow(true);
-      },
-    });
+      });
   }
 
   return {
     form,
     onSubmit,
-    isPending,
-    error,
+    isLoading,
+    isError,
+    isSuccess,
+    error: error as { data?: Response },
     data,
-    isShow,
-    setIsShow,
   };
 }

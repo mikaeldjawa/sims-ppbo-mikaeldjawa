@@ -6,11 +6,11 @@ import AuthLayout from "../components/AuthLayout"
 import RegisterForm from "../components/RegisterForm"
 
 const RegisterPage = () => {
-  const { form, onSubmit, isPending, error, data, isShow, setIsShow } = useRegisterForm()
+  const { form, onSubmit, isLoading, error, data, isError, isSuccess } = useRegisterForm()
 
   return (
     <AuthLayout subtitle="Lengkapi data untuk membuat akun">
-      <RegisterForm form={form} onSubmit={onSubmit} isPending={isPending} />
+      <RegisterForm form={form} onSubmit={onSubmit} isPending={isLoading} />
 
       <div className="flex gap-1">
         <p className="text-center">sudah punya akun? login</p>
@@ -18,10 +18,9 @@ const RegisterPage = () => {
       </div>
 
       <AuthInfo
-        isError={!!error}
-        isShow={isShow}
-        message={error ? error.message : data?.message}
-        setShowError={setIsShow}
+        isError={isError}
+        isShow={isSuccess || isError}
+        message={error ? error.data?.message : data?.message}
       />
     </AuthLayout>
   )
