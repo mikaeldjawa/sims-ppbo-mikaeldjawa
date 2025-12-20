@@ -24,7 +24,7 @@ const AuthLayout = (props: AuthLayoutProps) => {
         </div>
       </div>
 
-      <div className="hidden md:block h-full w-full overflow-hidden">
+      <div className="hidden md:block h-screen w-full overflow-hidden">
         <img
           src={LoginIlustration}
           alt="Login Illustration"
