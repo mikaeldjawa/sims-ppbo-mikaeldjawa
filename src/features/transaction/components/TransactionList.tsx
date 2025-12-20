@@ -7,9 +7,17 @@ import useTransactionHistory from '../hooks/useTransactionHistory';
 const TransactionList = () => {
   const { records, isFetching, isLastPage, handleShowMore } = useTransactionHistory();
 
+  console.log(records);
+
   return (
     <div className="space-y-6">
       <h6 className='text-xl font-semibold'>Semua Transaksi</h6>
+
+      {
+        records.length === 0 && (
+          <p className="text-center text-gray-400">Tidak Ada Transaksi</p>
+        )
+      }
 
       <ul className="flex flex-col gap-6">
         {records.map((transaction, index) => {
