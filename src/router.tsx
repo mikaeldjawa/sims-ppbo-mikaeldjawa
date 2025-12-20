@@ -6,11 +6,11 @@ import HomePage from "./features/home/pages/HomePage"
 import TopUpPage from "./features/top-up/pages/TopUpPage"
 import ServicePage from "./features/service/pages/ServicePage"
 import TransactionPage from "./features/transaction/pages/TransactionPage"
-import Header from "./components/layout/Header"
 import { Navbar } from "./components/shared/Navbar"
 import ProtectRoute from "./components/shared/ProtectRoute"
 import PublicRoute from "./components/shared/PublicRoute"
 import ProfilePage from "./features/profile/pages/ProfilePage"
+import Header from "./components/layout/Header"
 
 const router = createBrowserRouter(
   [{
