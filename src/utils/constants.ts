@@ -16,7 +16,7 @@ export const ROUTES = {
   REGISTER: "/auth/register",
   TOP_UP: "/top-up",
   TRANSACTIONS: "/transaction",
-  ELECTRICITY_PAYMENTS: "/electricity-payments",
+  SERVICE: "/service",
   ACCOUNT: "/account",
 };
 // ====================================================================================================================

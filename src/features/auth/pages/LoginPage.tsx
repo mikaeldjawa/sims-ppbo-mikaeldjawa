@@ -10,18 +10,29 @@ const LoginPage = () => {
 
   return (
     <AuthLayout subtitle="Masuk atau buat akun untuk memulai">
-      <LoginForm form={form} onSubmit={onSubmit} isPending={isLoading} />
+      <div className="w-full max-w-md mx-auto">
+        <LoginForm form={form} onSubmit={onSubmit} isPending={isLoading} />
 
-      <div className="flex gap-1">
-        <p className="text-center">belum punya akun? registrasi</p>
-        <Link className="text-primary font-semibold" to={ROUTES.REGISTER}>di sini</Link>
+        <div className="flex flex-row justify-center items-center gap-1 mt-6 text-sm md:text-base">
+          <p className="text-gray-600">belum punya akun? registrasi</p>
+          <Link
+            className="text-red-500 hover:text-red-600 font-bold transition-colors"
+            to={ROUTES.REGISTER}
+          >
+            di sini
+          </Link>
+        </div>
       </div>
 
-      <AuthInfo
-        isShow={isSuccess || isError}
-        isError={isError}
-        message={error ? error?.data?.message : data?.message} />
+      <div className="mt-4">
+        <AuthInfo
+          isShow={isSuccess || isError}
+          isError={isError}
+          message={error ? (error as any)?.data?.message : data?.message}
+        />
+      </div>
     </AuthLayout>
   )
 }
+
 export default LoginPage

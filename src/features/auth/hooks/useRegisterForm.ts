@@ -3,7 +3,8 @@ import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/utils/constants";
-import { useRegisterMutation, type Response } from "@/services/auth";
+import { useRegisterMutation } from "@/services/auth";
+import type { Response } from "@/services/types";
 
 export default function useRegisterForm() {
   const form = useForm<RegisterFormSchema>({

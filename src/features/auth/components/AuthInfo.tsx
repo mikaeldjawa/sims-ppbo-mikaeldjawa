@@ -12,28 +12,31 @@ const AuthInfo = ({ isError, isShow, message }: AuthInfoProps) => {
   const [isVisible, setIsVisible] = useState(isShow)
 
   useEffect(() => {
-    if (isShow) {
-      setIsVisible(true)
-    }
-    return () => {
-      setIsVisible(false)
-    }
+    setIsVisible(isShow)
   }, [isShow])
 
+  if (!isVisible || !message) return null
+
   return (
-    <>
-      {isShow && (
-        <div className={cn("w-[45vw] p-3 absolute bottom-20 flex justify-between items-center",
-          isError ? "bg-primary/10" : "bg-green-200",
-          isVisible ? "visible" : "invisible")}>
-          <p className={cn("text-sm text-center",
-            isError ? "text-destructive" : "text-green-600")}>{message}</p>
-          <X onClick={() => setIsVisible(false)} className={cn("cursor-pointer w-4 h-4",
-            isError ? "text-destructive" : "text-green-600"
-          )} />
-        </div>
+    <div
+      className={cn(
+        "fixed md:absolute bottom-10 left-1/2 -translate-x-1/2",
+        "w-[90%] md:w-full md:max-w-sm p-3 z-50 border",
+        "flex justify-between items-center transition-all duration-300 animate-in fade-in slide-in-from-bottom-4",
+        isError
+          ? "bg-red-50 border-red-200 text-red-600"
+          : "bg-green-50 border-green-200 text-green-600"
       )}
-    </>
+    >
+      <p className="text-sm font-medium pr-4">{message}</p>
+
+      <button
+        onClick={() => setIsVisible(false)}
+        className="shrink-0 hover:opacity-70 transition-opacity"
+      >
+        <X className="w-4 h-4" />
+      </button>
+    </div>
   )
 }
 

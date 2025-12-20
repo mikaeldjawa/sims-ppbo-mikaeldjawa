@@ -10,18 +10,27 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout subtitle="Lengkapi data untuk membuat akun">
-      <RegisterForm form={form} onSubmit={onSubmit} isPending={isLoading} />
+      <div className="w-full max-w-sm mx-auto">
+        <RegisterForm form={form} onSubmit={onSubmit} isPending={isLoading} />
 
-      <div className="flex gap-1">
-        <p className="text-center">sudah punya akun? login</p>
-        <Link className="text-primary font-semibold" to={ROUTES.LOGIN}>di sini</Link>
+        <div className="flex flex-row justify-center items-center gap-1 mt-6 text-sm md:text-base">
+          <p className="text-gray-600">sudah punya akun? login</p>
+          <Link
+            className="text-red-500 hover:text-red-600 font-bold transition-colors"
+            to={ROUTES.LOGIN}
+          >
+            di sini
+          </Link>
+        </div>
       </div>
 
-      <AuthInfo
-        isError={isError}
-        isShow={isSuccess || isError}
-        message={error ? error.data?.message : data?.message}
-      />
+      <div className="mt-4 w-full">
+        <AuthInfo
+          isError={isError}
+          isShow={isSuccess || isError}
+          message={error ? (error as any).data?.message : data?.message}
+        />
+      </div>
     </AuthLayout>
   )
 }

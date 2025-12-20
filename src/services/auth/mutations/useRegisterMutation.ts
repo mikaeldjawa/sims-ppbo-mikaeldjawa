@@ -1,5 +1,6 @@
 import { baseApi } from "@/services/api";
-import type { RegisterDTO, Response } from "../types";
+import type { RegisterDTO } from "../types";
+import type { Response } from "@/services/types";
 
 export const { useRegisterMutation } = baseApi.injectEndpoints({
   endpoints: (builder) => ({

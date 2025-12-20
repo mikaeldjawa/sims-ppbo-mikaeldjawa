@@ -1,54 +1,72 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { AtSign, LockKeyhole } from 'lucide-react'
+import { AtSign, LockKeyhole, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { LoginFormSchema } from '../forms/login'
 import type { UseFormReturn } from 'react-hook-form'
+import { InputWithIcon } from '@/components/ui/InputWithIcon'
 
 interface LoginFormProps {
-  form: UseFormReturn<LoginFormSchema, any, LoginFormSchema>
+  form: UseFormReturn<LoginFormSchema>
   onSubmit: (values: LoginFormSchema) => void
   isPending: boolean
 }
 
 const LoginForm = ({ form, onSubmit, isPending }: LoginFormProps) => {
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <div className="relative">
-                  <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
-                  <Input className="pl-8" placeholder="masukkan email anda" {...field} />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-full max-w-md mx-auto"
+      >
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormControl>
+                  <InputWithIcon
+                    icon={AtSign}
+                    isError={!!fieldState.error}
+                    placeholder="masukkan email anda"
+                    type="email"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs font-medium text-red-500" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormControl>
+                  <InputWithIcon
+                    icon={LockKeyhole}
+                    isError={!!fieldState.error}
+                    placeholder="masukkan password anda"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs font-medium text-red-500" />
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button
+          disabled={isPending}
+          className="w-full h-12 bg-red-500 hover:bg-red-600 transition-colors"
+          type="submit"
+        >
+          {isPending ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            "Masuk"
           )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <span className="relative">
-                  <LockKeyhole className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
-                  <Input type="password" className="pl-8" placeholder="masukkan password anda" {...field} />
-                </span>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button disabled={isPending} className="w-full mt-6" type="submit">Masuk</Button>
+        </Button>
       </form>
     </Form>
   )

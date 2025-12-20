@@ -1,5 +1,6 @@
 import { baseApi } from "@/services/api";
-import type { LoginDTO, Response } from "../types";
+import type { LoginDTO } from "../types";
+import type { Response } from "@/services/types";
 
 export const { useLoginMutation } = baseApi.injectEndpoints({
   endpoints: (builder) => ({

@@ -5,7 +5,8 @@ import { ROUTES } from "@/utils/constants";
 import { useLocation, useNavigate } from "react-router";
 import { setCredentials } from "../authSlice";
 import { useDispatch } from "react-redux";
-import { useLoginMutation, type Response } from "@/services/auth";
+import { useLoginMutation } from "@/services/auth";
+import type { Response } from "@/services/types";
 
 export default function useLoginForm() {
   const form = useForm<LoginFormSchema>({
@@ -31,6 +32,7 @@ export default function useLoginForm() {
         if (token) {
           dispatch(setCredentials(token));
           navigate(from, { replace: true });
+          form.reset();
         }
       });
   }
