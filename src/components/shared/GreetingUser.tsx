@@ -18,7 +18,7 @@ const GreetingUser = () => {
           className="object-cover"
         />
         <AvatarFallback className="bg-red-50 text-red-500 font-bold">
-          {getInitials(`${profile?.data?.first_name} ${profile?.data?.last_name}`)}
+          {getInitials(profile?.data?.first_name, profile?.data?.last_name)}
         </AvatarFallback>
       </Avatar>
 
